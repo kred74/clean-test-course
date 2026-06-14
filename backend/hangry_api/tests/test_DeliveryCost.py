@@ -4,14 +4,13 @@ from django_mock_queries.query import MockSet, MockModel
 def test_LotsOfItems():
   #Arrange
   order = MockSet()
-  order.add(MockModel(quantity=5))
-  order.add(MockModel(quantity=5))
-  order.add(MockModel(quantity=5))
-  delivery_distance = 6
+  order.add(MockModel(quantity=3))
+  order.add(MockModel(quantity=1))
+  delivery_distance = 2
   #Act
   cost = Delivery.calculate(order,delivery_distance)
   #Assert
-  assert cost == 7.5
+  assert cost == 2.5
 
 def test_MiddleOfTheRoadItems():
   #Arrange
@@ -26,10 +25,13 @@ def test_MiddleOfTheRoadItems():
   assert cost == 5
 
 def test_LittleItems():
-  #Arrange
-  # TODO: Arrange the items to run the test
+ #Arrange
+  order = MockSet()
+  order.add(MockModel(quantity=3))
+  order.add(MockModel(quantity=1))
+  delivery_distance = 2
   #Act
-  # TODO: Call the function that will be tested
+  cost = Delivery.calculate(order,delivery_distance)
   #Assert
-  # TODO: replace the pass with an assert to test the value returned.
+  assert cost == 2.50
   pass
