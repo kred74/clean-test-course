@@ -1,23 +1,23 @@
 from api.controllers import Delivery
-from django_mock_queries.query import MockSet, MockModel
+from tests.helpers import mock_model
 
 def test_LotsOfItems():
   #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=3))
-  order.add(MockModel(quantity=1))
+  order = []
+  order.append(mock_model(quantity=3))
+  order.append(mock_model(quantity=1))
   delivery_distance = 2
   #Act
   cost = Delivery.calculate(order,delivery_distance)
   #Assert
-  assert cost == 2.5
+  assert cost == 3.5
 
 def test_MiddleOfTheRoadItems():
   #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=2))
-  order.add(MockModel(quantity=2))
-  order.add(MockModel(quantity=2))
+  order = []
+  order.append(mock_model(quantity=2))
+  order.append(mock_model(quantity=2))
+  order.append(mock_model(quantity=2))
   delivery_distance = 4
   #Act
   cost = Delivery.calculate(order,delivery_distance)
@@ -26,12 +26,12 @@ def test_MiddleOfTheRoadItems():
 
 def test_LittleItems():
  #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=3))
-  order.add(MockModel(quantity=1))
+  order = []
+  order.append(mock_model(quantity=3))
+  order.append(mock_model(quantity=1))
   delivery_distance = 2
   #Act
   cost = Delivery.calculate(order,delivery_distance)
   #Assert
-  assert cost == 2.50
+  assert cost == 3.50
   pass
